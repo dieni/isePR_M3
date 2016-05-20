@@ -1,0 +1,240 @@
+/*
+    Custom CSS file for EAT! project site.
+*/
+
+.navbar-brand {
+    padding-top: 30px;
+    font-size: 35px;
+    font-weight: 300;
+}
+
+#top-menu .navbar-brand img {
+    margin-top: -7px;
+    width: 40px;
+}
+
+#top-menu.navbar .nav li a {
+    font-weight: 400;
+}
+
+.navbar-inverse .navbar-nav>.open>a,
+.navbar-inverse .navbar-nav>.open>a:hover,
+.navbar-inverse .navbar-nav>.open>a:focus {
+    color: #1abc9c;
+    background-color: transparent;
+}
+
+.navbar-inverse .navbar-nav>.open>a .caret,
+.navbar-inverse .navbar-nav>.open>a:hover .caret,
+.navbar-inverse .navbar-nav>.open>a:focus .caret {
+    border-top-color: #1abc9c;
+    border-bottom-color: #1abc9c;
+}
+
+header {
+    background-color: #1abc9c;
+    padding-top: 15%;
+    padding-bottom: 50px;
+    color: white;
+}
+
+header .img-responsive {
+    margin: 0 auto;
+    max-height: 400px;
+}
+
+header.food-header {
+    background: url("../img/unsplash-food.jpg") no-repeat center center;
+}
+
+header.food-header2 {
+    background: url("../img/unsplash-food2.jpg") no-repeat center center;
+}
+
+label {
+    font-weight: 700;
+}
+
+.checkbox,
+.radio {
+    padding-left: 0;
+}
+
+input[type=radio],
+input[type=checkbox] {
+    margin: 10px 0 0;
+}
+
+#navbar-header-responsive {
+    padding: 14px 21px;
+    font-size: 24px;
+}
+
+.alert {
+    position: absolute;
+    width: 100%;
+    top: 55px;
+}
+
+#portfolio .tile i {
+    text-align: center;
+    font-size: 60px;
+}
+
+section {
+    padding: 100px 0;
+    border-bottom: 1px solid #edeff1;
+}
+
+section:nth-child(even) {
+    background-color: #edeff1;
+}
+
+section:nth-child(even) .tile {
+    background-color: white;
+}
+
+footer ul.social {
+    font-size: 25px;
+}
+
+footer ul.social li {
+    margin-right: 15px;
+}
+
+.carousel-control {
+    background-image: none !important;
+    background-color: transparent;
+}
+
+.carousel-control i {
+    font-size: 40px;
+    padding-top: 180px;
+}
+
+.carousel-indicators {
+    bottom: -40px;
+}
+
+.carousel-indicators li {
+    width: 20px;
+    height: 20px;
+}
+
+.carousel-indicators .active {
+    width: 22px;
+    height: 22px;
+}
+
+.carousel-inner {
+    min-height: 400px;
+}
+
+.carousel-inner .item .col-md-4 {
+    padding-left: 10%;
+}
+
+.carousel-inner .item .col-md-8 {
+    padding-right: 10%;
+    padding-left: 5%;
+    padding-top: 2%;
+}
+
+.tile.green {
+    background-color: #1abc9c;
+    color: white;
+}
+
+#contact-form {
+    background-color: #edeff1;
+}
+
+#contact-form textarea.form-control {
+    height: 165px;
+}
+
+.form-group .form-control {
+    margin-bottom: 20px;
+}
+
+#search {
+    padding-top: 0;
+}
+
+#search .btn-group {
+    margin-bottom: 25px;
+}
+
+.filterbar {
+    background-color: #34495e;
+    color: white;
+    padding: 15px 0;
+}
+
+ul.filter-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.filter-list li {
+    display: inline-block;
+    margin: 0 3px;
+}
+
+.filter-list .form-control {
+    min-width: 170px;
+}
+
+.radio label,
+.checkbox label {
+    padding-left: 30px;
+}
+
+.checkbox .icons {
+    margin-top: 6px;
+}
+
+#search .container-fluid {
+    background-color: #34495e;
+    margin-bottom: 50px;
+}
+
+
+/*
+.grey {
+    background-color: #edeff1;
+}
+
+.grey .container-fluid .tile {
+    background-color: white;
+}
+*/
+
+#map .row {
+    background-color: #34495e;
+    height: 380px;
+    padding: 20px 0;
+}
+
+#map iframe {
+    pointer-events: none;
+}
+
+.back-to-top {
+    display: none;
+    width: 51px;
+    height: 45px;
+    position: fixed;
+    z-index: 999;
+    right: 20px;
+    bottom: 0;
+    background-color: #34495e;
+    text-align: center;
+    color: white;
+    padding-top: 10px;
+}
+
+.back-to-top:hover {
+    color: #1abc9c;
+}
