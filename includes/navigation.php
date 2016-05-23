@@ -21,7 +21,7 @@ session_start();
                         if(isset($_SESSION['currentUserId'])) {
                             echo "<li><a href='search.php'><i class='fa fa-search'></i> Suche</a></li>";
                             echo "<li><a href='application/logout.php'><i class='fa fa-sign-out'></i> Logout</a></li>";
-                        }
+                        }						
                     ?>
                 </ul>
             </div>
