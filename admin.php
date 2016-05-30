@@ -79,11 +79,29 @@
 			
 			if(!$result){
 				echo "Es sind keine Caterer registriert";
-			} else {
-				$table = array();
-				while ($row = mysql_fetch_array($result)) {
-					$table[] = $row;
+			} else {	
+				
+				$i = 0;
+				$tableTemp = array();
+
+				while ($row = mysqli_fetch_assoc($result)){
+					$tableTemp[$i]['kitchenDescription'] = $row['kitchenDescription'];
+					$tableTemp[$i]['catererId'] = $row['catererId'];
+					$i++;
 				}
+				
+				$table = array();
+				foreach($tableTemp as &$tempRow){
+					/* foreach($table as &$row){
+						if(row['kitchenDescription'] == tempRow['kitchenDescription']){
+							
+						}						
+					} */
+					array_push($table, 'kitchenDescription' => tempRow['kitchenDescription'], 'quantityVendor' => 1);
+					echo $tempRow['kitchenDescription']. " " .$tempRow['catererId']. "<br>";					
+				}
+				
+				
 			}
 			
 			
