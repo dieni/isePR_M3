@@ -18,114 +18,146 @@
         </div>
     </header>
 	
-	<div id="main-content">
-        <h3>Anzahl der Registrierten Benutzer</h3>
-		<?php	
-			
-			//registered caterers
-			$query = "SELECT COUNT(*) AS count FROM user WHERE type = 'caterer'";
-			$result = mysqli_query($connection, $query);
-			
-			if(!$result) {
-				echo "Anzahl der Caterer: 0<br>";
-			} else {
-				$quantityCaterer = mysqli_fetch_assoc($result);
-				echo "Anzahl der Caterer: " .$quantityCaterer['count']. "<br>";
-			}
 	
-			//registered users
-			$query = "SELECT COUNT(*) AS count FROM user WHERE type = 'user'";
-			$result = mysqli_query($connection, $query);
-			
-			if(!$result) {
-				echo "Anzahl der User: 0<br>";
-			} else {
-				$quantityCaterer = mysqli_fetch_assoc($result);
-				echo "Anzahl der User: " .$quantityCaterer['count']. "<br>";
-			}
-		?>
+	<div id="main-content">
+		<section>
 		
-		<h3>Durchschnittliche Personencapazität der Caterer</h3>
-		<?php
-			$query = "SELECT maxPerson FROM caterer";
-			$result = mysqli_query($connection, $query);
-			
-			if(!$result){
-				echo "Es sind keine Caterer registriert";
-			} else {
-				$averagePC = 0;
-				$countQC = 0; //count how much caterer are registered
-				while($row = mysqli_fetch_assoc($result)){
-					$averagePC += $row['maxPerson'];
-					$countQC++;
-				}
+			<div class="container">
+			<h3>Anzahl der Registrierten Benutzer</h3>
+				<div class="well well-lg"
 				
-				echo round($averagePC/$countQC,2);
-			}
-		?>
-		
-		<h3>Welche Speißen werden wie oft angeboten</h3>
-		<?php
-		
-			$query = "SELECT kitchenDescription, catererId FROM kitchen INNER JOIN catererskitchen ON kitchen.kitchenId = catererskitchen.kitchenId";
-			$result = mysqli_query($connection, $query);
-			
-			
-			//Count how often each kitchen is offered by caterers 
-			if(!$result){
-				echo "Es sind keine Caterer registriert";
-			} else {	
-				
-				//Fetch query in multidimensonal array
-				$i = 0;
-				$tableTemp = array();
-				while ($row = mysqli_fetch_assoc($result)){
-					$tableTemp[$i]['kitchenDescription'] = $row['kitchenDescription'];
-					$tableTemp[$i]['catererId'] = $row['catererId'];
-					$i++;
-				}
-				
-				//do the count thing
-				$i = 0;	
-				$table = array();
-				foreach($tableTemp as $tempRow){
-					$inserted = false;
-
-					//kitchenDescription already in table? if yes, count plus 1
-					foreach($table as &$row){
-						if($row['kitchenDescription'] == $tempRow['kitchenDescription']){
-							$row['quantityCaterer'] += 1;
-							$inserted = true;
+					<h3></h3> <!-- wtf?! -->
+					<?php	
+						
+						//registered caterers
+						$query = "SELECT COUNT(*) AS count FROM user WHERE type = 'caterer'";
+						$result = mysqli_query($connection, $query);
+						
+						if(!$result) {
+							echo "Anzahl der Caterer: 0<br>";
+						} else {
+							$quantityCaterer = mysqli_fetch_assoc($result);
+							echo "Anzahl der Caterer: " .$quantityCaterer['count']. "<br>";
 						}
-					}
-					
-					//If kitchenDescription was already in table, don't create a new entry
-					if(!$inserted){
-						$table[$i]['kitchenDescription'] = $tempRow['kitchenDescription'];
-						$table[$i]['quantityCaterer'] = 1;
-						$i++;
-					}
-				}
 				
-				//sort array
-				usort($table, function($a, $b) {
-					return $b['quantityCaterer'] - $a['quantityCaterer'];
-				});
-				
-				//Display result
-				$i = 0;
-				$arrayLength = sizeof($table);
-				while($i<$arrayLength){
-					echo $table[$i]['kitchenDescription']. ": " .$table[$i]['quantityCaterer']. "<br>";
-					$i++;
-				}
-				
-			}
-			
-			
-		?>
+						//registered users
+						$query = "SELECT COUNT(*) AS count FROM user WHERE type = 'user'";
+						$result = mysqli_query($connection, $query);
+						
+						if(!$result) {
+							echo "Anzahl der User: 0<br>";
+						} else {
+							$quantityCaterer = mysqli_fetch_assoc($result);
+							echo "Anzahl der User: " .$quantityCaterer['count']. "<br>";
+						}
+					?>
+				</div>
+			</div>
+		</section>
 		
-		<h3>Welche durchschnittliche Bewertung haben die Caterer</h3>
+		<section>
+			<div class="container">
+				<h3>Durchschnittliche Personencapazität der Caterer</h3>
+				<div class="well well-lg">
+					
+					<?php
+						$query = "SELECT maxPerson FROM caterer";
+						$result = mysqli_query($connection, $query);
+						
+						if(!$result){
+							echo "Es sind keine Caterer registriert";
+						} else {
+							$averagePC = 0;
+							$countQC = 0; //count how much caterer are registered
+							while($row = mysqli_fetch_assoc($result)){
+								$averagePC += $row['maxPerson'];
+								$countQC++;
+							}
+							
+							echo round($averagePC/$countQC,2);
+						}
+					?>
+				</div>
+			</div>
+		</section>
+		
+		<section>
+			<div class="container">
+				<h3>Welche Speißen werden wie oft angeboten</h3>
+				<div class="well well-lg">
+					
+					<?php
+					
+						$query = "SELECT kitchenDescription, catererId FROM kitchen INNER JOIN catererskitchen ON kitchen.kitchenId = catererskitchen.kitchenId";
+						$result = mysqli_query($connection, $query);
+						
+						
+						//Count how often each kitchen is offered by caterers 
+						if(!$result){
+							echo "Es sind keine Caterer registriert";
+						} else {	
+							
+							//Fetch query in multidimensonal array
+							$i = 0;
+							$tableTemp = array();
+							while ($row = mysqli_fetch_assoc($result)){
+								$tableTemp[$i]['kitchenDescription'] = $row['kitchenDescription'];
+								$tableTemp[$i]['catererId'] = $row['catererId'];
+								$i++;
+							}
+							
+							//do the count thing
+							$i = 0;	
+							$table = array();
+							foreach($tableTemp as $tempRow){
+								$inserted = false;
+
+								//kitchenDescription already in table? if yes, count plus 1
+								foreach($table as &$row){
+									if($row['kitchenDescription'] == $tempRow['kitchenDescription']){
+										$row['quantityCaterer'] += 1;
+										$inserted = true;
+									}
+								}
+								
+								//If kitchenDescription was already in table, don't create a new entry
+								if(!$inserted){
+									$table[$i]['kitchenDescription'] = $tempRow['kitchenDescription'];
+									$table[$i]['quantityCaterer'] = 1;
+									$i++;
+								}
+							}
+							
+							//sort array
+							usort($table, function($a, $b) {
+								return $b['quantityCaterer'] - $a['quantityCaterer'];
+							});
+							
+							//Display result
+							$i = 0;
+							$arrayLength = sizeof($table);
+							while($i<$arrayLength){
+								echo $table[$i]['kitchenDescription']. ": " .$table[$i]['quantityCaterer']. "<br>";
+								$i++;
+							}
+							
+						}
+						
+						
+					?>
+				</div>
+			</div>
+		</section>
+		
+		<section>
+			<div class="container">
+				<h3>Welche durchschnittliche Bewertung haben die Caterer</h3>
+				<div class="well well-lg">
+			
+				<div>
+			</div>
+		</section>
+		
 		
 		<?php
 		/* $query = "SELECT sterne FROM caterer INNER JOIN bewertungen";
@@ -145,8 +177,16 @@
 			} */
 		?>
 		
+		<section>
+			<div class="container">
+				<h3>Welche Zusatzpakete werden wie oft angeboten</h3>
+				<div class="well well-lg">
+			
+				<div>
+			</div>
+		</section>
 		
-		<h3>Welche Zusatzpakete werden wie oft angeboten</h3>
+		
 		
 		
 	</div>
