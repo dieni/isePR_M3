@@ -20,6 +20,25 @@
 	
 	
 	<div id="main-content">
+		
+	<div class="container">	
+		
+	<div class="row demo-row">
+        <div class="col-xs-12">
+          <nav id= "statistic-nav" class="navbar navbar-inverse navbar-embossed" role="navigation">
+            <div class="collapse navbar-collapse" id="navbar-collapse-01">
+              <ul class="nav navbar-nav navbar-left">
+                <li><a href="#fakelink">User<span class="navbar-unread">1</span></a></li>
+				<li><a href="#fakelink">Personenkapazität<span class="navbar-unread">1</span></a></li>
+				<li><a href="#fakelink">Küchen<span class="navbar-unread">1</span></a></li>
+				<li><a href="#fakelink">Bewertung<span class="navbar-unread">1</span></a></li>
+				<li><a href="#fakelink">Zusatzpakete<span class="navbar-unread">1</span></a></li>
+               </ul>
+            </div><!-- /.navbar-collapse -->
+          </nav><!-- /navbar -->
+        </div>
+      </div> <!-- /row -->
+	</div>
 		<section>
 		
 			<div class="container">
@@ -156,7 +175,7 @@
 				<h3>Bewertung der Caterer</h3>
 				<div class="well well-lg">
 					<?php
-					$query = "SELECT rating FROM bewertung";
+						$query = "SELECT rating FROM bewertung";
 						$result = mysqli_query($connection, $query);
 						
 						if(!$result){
@@ -183,7 +202,60 @@
 			<div class="container">
 				<h3>Welche Zusatzpakete werden wie oft angeboten</h3>
 				<div class="well well-lg">
-			
+					<?php
+						$query = "SELECT name, catererId FROM package INNER JOIN catererpackage ON package.packageId = catererpackage.packageId";
+						$result = mysqli_query($connection, $query);
+						
+						if(!$result){
+							echo "Es sind entweder keine Caterer vorhanden oder es wurden keine Zusatzpakete gekauft.";
+						} else {
+							
+							//Fetch query in multidimensonal array
+							$i = 0;
+							$tableTemp = array();
+							while ($row = mysqli_fetch_assoc($result)){
+								$tableTemp[$i]['name'] = $row['name'];
+								$tableTemp[$i]['catererId'] = $row['catererId'];
+								$i++;
+							}
+							
+							//do the count thing
+							$i = 0;	
+							$table = array();
+							foreach($tableTemp as $tempRow){
+								$inserted = false;
+
+								//name already in table? if yes, count plus 1
+								foreach($table as &$row){
+									if($row['name'] == $tempRow['name']){
+										$row['quantityCaterer'] += 1;
+										$inserted = true;
+									}
+								}
+								
+								//If name was already in table, don't create a new entry
+								if(!$inserted){
+									$table[$i]['name'] = $tempRow['name'];
+									$table[$i]['quantityCaterer'] = 1;
+									$i++;
+								}
+								
+								//sort array
+								usort($table, function($a, $b) {
+									return $b['quantityCaterer'] - $a['quantityCaterer'];
+								});
+								
+								echo "Folgende Liste zeigt an, welche Zusatzpakete von den Caterern wie oft angeboten werden: <br><br>";
+								$i = 0;
+								$arrayLength = sizeof($table);
+								while($i<$arrayLength){
+									echo $table[$i]['name']. ": " .$table[$i]['quantityCaterer']. "<br>";
+									$i++;
+								}
+								
+							}
+						}
+					?>
 				<div>
 			</div>
 		</section>
