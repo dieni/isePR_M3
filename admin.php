@@ -66,14 +66,14 @@
 						}
 				
 						//registered users
-						$query = "SELECT COUNT(*) AS count FROM user WHERE type = 'user'";
+						$query = "SELECT COUNT(*) AS count FROM user WHERE type = 'customer'";
 						$result = mysqli_query($connection, $query);
 						
 						if(!$result) {
-							echo "Anzahl der User: 0<br>";
+							echo "Anzahl der Customer: 0<br>";
 						} else {
 							$quantityCaterer = mysqli_fetch_assoc($result);
-							echo "Anzahl der User: " .$quantityCaterer['count']. "<br>";
+							echo "Anzahl der Customer: " .$quantityCaterer['count']. "<br>";
 						}
 					?>
 				</div>
