@@ -28,17 +28,23 @@
           <nav id= "statistic-nav" class="navbar navbar-inverse navbar-embossed" role="navigation">
             <div class="collapse navbar-collapse" id="navbar-collapse-01">
               <ul class="nav navbar-nav navbar-left">
-                <li><a href="#fakelink">User<span class="navbar-unread">1</span></a></li>
-				<li><a href="#fakelink">Personenkapazität<span class="navbar-unread">1</span></a></li>
-				<li><a href="#fakelink">Küchen<span class="navbar-unread">1</span></a></li>
-				<li><a href="#fakelink">Bewertung<span class="navbar-unread">1</span></a></li>
-				<li><a href="#fakelink">Zusatzpakete<span class="navbar-unread">1</span></a></li>
+                <li><a href="admin.php?site=user">User<span class="navbar-unread">1</span></a></li>
+				<li><a href="admin.php?site=kapazitaet"">Personenkapazität<span class="navbar-unread">1</span></a></li>
+				<li><a href="admin.php?site=kueche"">Küchen<span class="navbar-unread">1</span></a></li>
+				<li><a href="admin.php?site=bewertung"">Bewertung<span class="navbar-unread">1</span></a></li>
+				<li><a href="admin.php?site=zusatzpaket"">Zusatzpakete<span class="navbar-unread">1</span></a></li>
                </ul>
             </div><!-- /.navbar-collapse -->
           </nav><!-- /navbar -->
         </div>
       </div> <!-- /row -->
 	</div>
+	
+	<?php
+		if (isset($_GET["site"])){ 
+			$site = $_GET["site"];
+			if($site == "user"){
+	?>
 		<section>
 		
 			<div class="container">
@@ -74,6 +80,10 @@
 			</div>
 		</section>
 		
+		<?php
+			}elseif( $site == "kapazitaet"){
+		?>
+				
 		<section>
 			<div class="container">
 				<h3>Personenkapazität der Caterer</h3>
@@ -99,6 +109,10 @@
 				</div>
 			</div>
 		</section>
+		
+		<?php
+			}elseif($site== "kueche"){
+		?>
 		
 		<section>
 			<div class="container">
@@ -170,6 +184,10 @@
 			</div>
 		</section>
 		
+		<?php
+			}elseif($site== "bewertung"){
+		?>
+		
 		<section>
 			<div class="container">
 				<h3>Bewertung der Caterer</h3>
@@ -195,7 +213,9 @@
 			</div>
 		</section>
 		
-		
+		<?php
+			}elseif($site== "zusatzpaket"){
+		?>
 		
 		
 		<section>
@@ -260,29 +280,13 @@
 			</div>
 		</section>
 		
+		<?php
+			}
+		?>
 		
+		<?php
+		}
+		?>
 		
 		
 	</div>
-	
-	
-<!--
-Der Admin soll folgende Möglichkeiten besitzen:
-
-STATISTIK:
-- Abrufen wie viele User und Caterer die Platform nutzen.
-- Welche Speisen wie oft angeboten werden (türkisch, italienisch, etc.).
-- Was die durchschnittliche Bewertung der Caterer ergiebt (nur jene die auch wirklich bewertet wurden).
-- Welche Zusatzpakete wie oft gekauft wurden.
-
-FUNKTION:
-- Caterer entfernen
-- User entfernen
-
-
-
-Files geändert:
-	-navigation.php
-
--->
-
