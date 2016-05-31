@@ -40,7 +40,7 @@
       </div> <!-- /row -->
 	</div>
 	
-	<?php
+	<?php//navigation view
 		if (isset($_GET["site"])){ 
 			$site = $_GET["site"];
 			if($site == "user"){
