@@ -23,7 +23,7 @@
 		<section>
 		
 			<div class="container">
-			<h3>Anzahl der Registrierten Benutzer</h3>
+			<h3>Registrierte Benutzer</h3>
 				<div class="well well-lg"
 				
 					<h3></h3> <!-- wtf?! -->
@@ -57,7 +57,7 @@
 		
 		<section>
 			<div class="container">
-				<h3>Durchschnittliche Personencapazität der Caterer</h3>
+				<h3>Personenkapazität der Caterer</h3>
 				<div class="well well-lg">
 					
 					<?php
@@ -74,7 +74,7 @@
 								$countQC++;
 							}
 							
-							echo round($averagePC/$countQC,2);
+							echo "Durchschnittlich haben Caterer eine Kapazität von <b>" .round($averagePC/$countQC,2). " Personen</b>.";
 						}
 					?>
 				</div>
@@ -83,7 +83,7 @@
 		
 		<section>
 			<div class="container">
-				<h3>Welche Speißen werden wie oft angeboten</h3>
+				<h3>Küchen</h3>
 				<div class="well well-lg">
 					
 					<?php
@@ -134,6 +134,8 @@
 							});
 							
 							//Display result
+							
+							echo "Folgende Liste zeigt an, welche Küchen von den Caterern wie oft angeboten werden: <br><br>";
 							$i = 0;
 							$arrayLength = sizeof($table);
 							while($i<$arrayLength){
@@ -151,31 +153,31 @@
 		
 		<section>
 			<div class="container">
-				<h3>Welche durchschnittliche Bewertung haben die Caterer</h3>
+				<h3>Bewertung der Caterer</h3>
 				<div class="well well-lg">
-			
+					<?php
+					$query = "SELECT rating FROM bewertung";
+						$result = mysqli_query($connection, $query);
+						
+						if(!$result){
+							echo "Es sind keine Caterer registriert";
+						} else {
+							$averageRating = 0;
+							$countRatings = 0; //count how much caterer are registered
+							while($row = mysqli_fetch_assoc($result)){
+								$averageRating += $row['rating'];
+								$countRatings++;
+							}
+							
+							echo "Durchschnittlich wurden alle Caterer zusammen mit <b>" .round($averageRating/$countRatings,2). " Sterne</b> bewertet.";
+						}
+					?>
 				<div>
 			</div>
 		</section>
 		
 		
-		<?php
-		/* $query = "SELECT sterne FROM caterer INNER JOIN bewertungen";
-			$result = mysqli_query($connection, $query);
-			
-			if(!$result){
-				echo "Es sind keine Caterer registriert";
-			} else {
-				$averageRating = 0;
-				$countRatings = 0; //count how much caterer are registered
-				while($row = mysqli_fetch_assoc($result)){
-					$averageRating += $row['sterne'];
-					$countRatings++;
-				}
-				
-				echo round($averageRating/$countRatings,2);
-			} */
-		?>
+		
 		
 		<section>
 			<div class="container">
